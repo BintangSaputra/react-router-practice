@@ -1,34 +1,39 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-export const Content = () => {
-  return <h2>hai</h2>;
-};
+class Form extends React.Component {
+  state = {
+    value: "Tony Stark and Romanov is dead"
+  };
 
-export const Router = () => {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+  handleChange = event => {
+    this.setState.value({
+      value: event.target.value
+    });
+  };
 
-        <Route path="/" exact component={Index} />
-        <Route path="/about" component={About} />
-        <Route path="/users" component={Users} />
-      </div>
-    </Router>
-  );
-};
+  handleSubmit = event => {
+    event.preventDefault();
+    alert(`Fun Fact: ${this.state.value}`);
+  };
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <fieldset>
+          <label>Fun Fact</label>
+          <input
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+        </fieldset>
+        <input type="submit" value="Submit Fun Fact" />
 
-export default About;
+        <pre>
+          <code>{this.state.value}</code>
+        </pre>
+      </form>
+    );
+  }
+}
+
+export default Form;
